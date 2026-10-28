@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Xadrez D20 ⚔️🎲</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- TELA DE LOBBY -->
+  <div id="lobby" class="lobby">
+    <div class="lobby-card">
+      <h1>♞ Xadrez D20 🎲</h1>
+      <p class="tagline">Xadrez caótico: cada lance depende de um dado de 20 lados!</p>
+      <input id="playerName" maxlength="20" placeholder="Seu nome" autocomplete="off" />
+      <button id="btnEnter" class="primary">Entrar no lobby</button>
+      <p id="lobbyError" class="error"></p>
+
+      <div id="roomBrowser" class="hidden">
+        <div class="room-browser-header">
+          <h3>Salas disponíveis</h3>
+          <button id="btnRefresh" title="Atualizar lista">🔄</button>
+        </div>
+        <ul id="roomList" class="room-list"></ul>
+        <button id="btnCreate" class="primary">➕ Criar nova sala</button>
+        <div class="divider">ou entre com código</div>
+        <div class="join-row">
+          <input id="roomCode" maxlength="4" placeholder="CÓDIGO" autocomplete="off" />
+          <button id="btnJoin">Entrar</button>
+        </div>
+      </div>
+      <div class="rules">
+        <h3>🎲 Regras do dado</h3>
+        <ul>
+          <li><b>20</b> — Crítico! Move e <b>joga de novo</b></li>
+          <li><b>13–19</b> — Sucesso: a peça vai onde você mandou</li>
+          <li><b>2–12</b> — Falha: a peça vai para o <b>lado oposto</b> (ou fica parada)</li>
+          <li><b>1</b> — Desastre: a peça é <b>destruída</b> 💀</li>
+        </ul>
+        <small>Promoção de peão é automática para Dama. Até o rei pode ser destruído!</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- TELA DE JOGO -->
+  <div id="game" class="game hidden">
+    <header class="topbar">
+      <div class="room-info">
+        Sala <b id="roomCodeLabel"></b>
+        <button id="btnCopy" title="Copiar código">📋</button>
+      </div>
+      <div id="statusText" class="status"></div>
+      <div>
+        <button id="btnRestart">🔄 Reiniciar</button>
+        <button id="btnLeave">🚪 Sair</button>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="board-area">
+        <div id="playerTop" class="player-tag"></div>
+        <div id="board" class="board"></div>
+        <div id="playerBottom" class="player-tag"></div>
+      </section>
+
+      <aside class="side">
+        <div class="dice-panel">
+          <div id="dice" class="dice">🎲</div>
+          <div id="diceResult" class="dice-result">Faça um lance para rolar o dado!</div>
+        </div>
+        <div class="log-panel">
+          <h3>📜 Registro</h3>
+          <ul id="log"></ul>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="client.js"></script>
+</body>
+</html>
